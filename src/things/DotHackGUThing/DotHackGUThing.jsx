@@ -10,7 +10,7 @@ import Button from '../../components/Button/index.js'
 import Toggle from '../../components/Toggle.jsx'
 
 export default function DotHackGUThing() {
-  const {setItem, getItem, clearItem} = useLocalStorage()
+  const {setItem, getItem, clearItem} = useLocalStorage('a')
   const key = '/things/dothackgu'
   const [ls, setLs] = useState(getItem(key) ?? {})
   const [visibilities, setVisibilities] = useState({})
