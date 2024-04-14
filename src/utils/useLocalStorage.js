@@ -1,4 +1,4 @@
-export default function useLocalStorage () {
+export default function useLocalStorage() {
   const getItem = (key) => {
     let value = localStorage.getItem(key)
     return JSON.parse(value)

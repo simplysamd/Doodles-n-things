@@ -1,9 +1,9 @@
-import Checkbox from "./Checkbox.jsx";
-import PropTypes from "prop-types";
+import Checkbox from './Checkbox.jsx'
+import PropTypes from 'prop-types'
 
 const noFunc = () => {}
 
-export default function Checklist (props) {
+export default function Checklist(props) {
   const {items, hideChecked, crossout, onChange = noFunc} = props
   // const [getItem, setItem] = useLocalStorage()
   // const [listItems, setListItems] = useState(getItem('checklist') ?? [])
@@ -18,7 +18,7 @@ export default function Checklist (props) {
 
   return (
     <>
-      {items.map(item => {
+      {items.map((item) => {
         return (
           <Checkbox
             crossout={crossout}

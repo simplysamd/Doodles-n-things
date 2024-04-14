@@ -1,7 +1,7 @@
-import {memo, useCallback} from "react";
-import PropTypes from "prop-types";
+import {memo, useCallback} from 'react'
+import PropTypes from 'prop-types'
 
-const Toggle = memo(props => {
+const Toggle = memo((props) => {
   const {label, onToggle, isActive, type = 1, start, end} = props
 
   // types:
@@ -20,13 +20,11 @@ const Toggle = memo(props => {
   }, [onToggle, label, isActive])
 
   if (type === 1) classes += ` ${isActive ? '!text-teal-400 border-b border-teal-400' : 'border-gray-700'}`
-  if (type === 2) classes += ` px-2${start ? ' rounded-l' : ''}${end ? ' rounded-r' : ''} border-transparent hover:border-pink-400 ${isActive ? 'bg-teal-400 text-gray-900 pointer-events-none' : 'bg-transparent'}`
+  if (type === 2)
+    classes += ` px-2${start ? ' rounded-l' : ''}${end ? ' rounded-r' : ''} border-transparent hover:border-pink-400 ${isActive ? 'bg-teal-400 text-gray-900 pointer-events-none' : 'bg-transparent'}`
 
   return (
-    <span
-      className={classes}
-      onClick={toggle}
-    >
+    <span className={classes} onClick={toggle}>
       {label}
     </span>
     // <span className={classes} onClick={toggle}>{label}</span>
@@ -41,7 +39,7 @@ Toggle.propTypes = {
   isActive: PropTypes.bool.isRequired,
   type: PropTypes.number,
   start: PropTypes.bool,
-  end: PropTypes.bool
+  end: PropTypes.bool,
 }
 
 export default Toggle

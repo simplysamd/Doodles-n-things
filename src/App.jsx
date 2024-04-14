@@ -1,4 +1,4 @@
-import {useRoute} from "wouter";
+import {useRoute} from 'wouter'
 import Home from './home'
 import Doodles from './doodles'
 import Things from './things'

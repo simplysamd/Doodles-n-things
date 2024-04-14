@@ -1,22 +1,22 @@
-import {useLocation} from "wouter";
+import {useLocation} from 'wouter'
 
-export default function DoodlesList () {
+export default function DoodlesList() {
   const [, navigate] = useLocation()
 
   const doodles = [
     {
       name: 'Checklist',
       desc: 'Basic checklist with custom checkboxes',
-      path: '/doodles/checklist'
+      path: '/doodles/checklist',
     },
     {
       name: 'Buttons',
-      desc: 'It\'s buttons',
-      path: '/doodles/buttons'
-    }
+      desc: "It's buttons",
+      path: '/doodles/buttons',
+    },
   ]
 
-  return doodles.map(doodle => {
+  return doodles.map((doodle) => {
     return (
       <div
         key={doodle.path}

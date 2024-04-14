@@ -1,14 +1,14 @@
 import {useRef} from 'react'
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types'
 
-export default function Checkbox (props) {
+export default function Checkbox(props) {
   const {label, description, id, onChange, defaultChecked, hideChecked, crossout} = props
   const labelRef = useRef(null)
   const inputRef = useRef(null)
 
   // if (labelRef.current && hideChecked) return null
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const {checked} = e.target
     if (checked && hideChecked) {
       labelRef.current.style.height = '0'
@@ -32,20 +32,20 @@ export default function Checkbox (props) {
   if (crossout) inputStyleSpec = 'w-0 h-0 before: w-0'
 
   return (
-    <label ref={labelRef} className="flex items-center cursor-pointer w-fit relative hover:text-pink-400">
+    <label ref={labelRef} className='flex items-center cursor-pointer w-fit relative hover:text-pink-400'>
       <input
         ref={inputRef}
         className={inputStyleGen + ' ' + inputStyleSpec}
         id={id}
-        type="checkbox"
+        type='checkbox'
         onChange={handleChange}
         defaultChecked={defaultChecked}
       />
       <span>{label}</span>
       {description && (
         <>
-          <span className="ml-2">-</span>
-          <span className="ml-2 italic opacity-50">{description}</span>
+          <span className='ml-2'>-</span>
+          <span className='ml-2 italic opacity-50'>{description}</span>
         </>
       )}
     </label>

@@ -1,5 +1,5 @@
 import {useRef} from 'react'
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types'
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
@@ -11,7 +11,7 @@ Button.propTypes = {
   size: PropTypes.number,
 }
 
-export default function Button (props) {
+export default function Button(props) {
   const {children, onClick, primary, secondary, filled, disabled, size} = props
 
   const bref = useRef(null)
@@ -19,7 +19,8 @@ export default function Button (props) {
   const clickVisual = useRef(null)
   // let ele = useRef(null)
 
-  let className = 'rounded-sm border border-slate-400 px-2 transition duration-100 z-1 relative overflow-visible disabled:opacity-50'
+  let className =
+    'rounded-sm border border-slate-400 px-2 transition duration-100 z-1 relative overflow-visible disabled:opacity-50'
   // const hovers = ' hover:border-teal-200 hover:text-teal-200'
 
   const fillClass = ' border-transparent text-gray-900 '
@@ -45,21 +46,20 @@ export default function Button (props) {
   if (size === 1) className += ' text-sm px-0.5'
   if (size === 3) className += ' text-xl px-4 py-1'
 
-  const onMouseDown = e => {
+  const onMouseDown = (e) => {
     const {target} = e
     target.style.transform = 'scale(1.05)'
     bwait.current.timeout = setTimeout(() => {
       if (bwait.current.ready) {
         bwait.current.ready = false
         target.style.transform = 'scale(1)'
-
       }
       bwait.current.timeout = null
     }, 100)
     // animateClick()
   }
 
-  const onMouseUp = e => {
+  const onMouseUp = (e) => {
     const {target} = e
     if (bwait.current.timeout) {
       bwait.current.ready = true
@@ -116,7 +116,6 @@ export default function Button (props) {
     //   // }, 0)
     // }, 500)
   }
-
 
   return (
     <div className={'relative overflow-visible'} ref={clickVisual}>

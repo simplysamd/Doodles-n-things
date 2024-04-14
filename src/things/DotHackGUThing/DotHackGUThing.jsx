@@ -1,15 +1,15 @@
-import {useState, useMemo, useEffect, Fragment} from "react";
+import {useState, useMemo, useEffect, Fragment} from 'react'
 import itemsData from '../../lists/dothackgu/volumeThree/items'
 import weaponsData from '../../lists/dothackgu/volumeThree/weapons'
 import armorData from '../../lists/dothackgu/volumeThree/armor'
 import monstersData from '../../lists/dothackgu/volumeThree/monsters'
-import accessoriesData from "../../lists/dothackgu/volumeThree/accessories";
+import accessoriesData from '../../lists/dothackgu/volumeThree/accessories'
 import Checklist from '../../components/Checklist'
-import useLocalStorage from "../../utils/useLocalStorage.js";
-import Button from "../../components/Button/index.js";
-import Toggle from "../../components/Toggle.jsx";
+import useLocalStorage from '../../utils/useLocalStorage.js'
+import Button from '../../components/Button/index.js'
+import Toggle from '../../components/Toggle.jsx'
 
-export default function DotHackGUThing () {
+export default function DotHackGUThing() {
   const {setItem, getItem, clearItem} = useLocalStorage()
   const key = '/things/dothackgu'
   const [ls, setLs] = useState(getItem(key) ?? {})
@@ -20,22 +20,22 @@ export default function DotHackGUThing () {
     setItem(key, ls)
   }, [ls])
 
-  const onChange = e => {
+  const onChange = (e) => {
     const {checked, id} = e.target
-    setLs(prev => ({...prev, [id]: checked}))
+    setLs((prev) => ({...prev, [id]: checked}))
   }
 
   const data = useMemo(() => {
-    const processData = values => {
+    const processData = (values) => {
       let completed = 0
       const total = values.length
       return {
-        items: values.map(each => {
+        items: values.map((each) => {
           each.defaultChecked = ls[each.name] ?? false
           if (each.defaultChecked) completed++
           return each
         }),
-        completion: `${completed} / ${total}`
+        completion: `${completed} / ${total}`,
       }
     }
 
@@ -44,7 +44,7 @@ export default function DotHackGUThing () {
       {title: 'Weapons', ...processData(weaponsData)},
       {title: 'Armor', ...processData(armorData)},
       {title: 'Accessories', ...processData(accessoriesData)},
-      {title: 'Monsters', ...processData(monstersData)}
+      {title: 'Monsters', ...processData(monstersData)},
     ]
   }, [ls])
 
@@ -52,13 +52,11 @@ export default function DotHackGUThing () {
 
   return (
     <>
-      <p className={'mb-4'}>
-        .hack GU "Book of 1000"
-      </p>
+      <p className={'mb-4'}>.hack GU "Book of 1000"</p>
 
       <div className={'flex justify-between'}>
         <div className={'flex gap-2'}>
-          {data.map(each => {
+          {data.map((each) => {
             const isVisible = visibilities[each.title] ?? true
             if (isVisible) checklists.push(each)
             return (
@@ -66,7 +64,7 @@ export default function DotHackGUThing () {
                 key={each.title}
                 label={each.title}
                 isActive={isVisible}
-                onToggle={() => setVisibilities((prev => ({...prev, [each.title]: !isVisible})))}
+                onToggle={() => setVisibilities((prev) => ({...prev, [each.title]: !isVisible}))}
               />
             )
           })}
@@ -76,10 +74,12 @@ export default function DotHackGUThing () {
         </Button>
       </div>
 
-      {checklists.map(each => {
+      {checklists.map((each) => {
         return (
           <Fragment key={'checklist' + each.title}>
-            <h3 className={'mt-4 mb-2 text-2xl underline capitalize'}>{each.title} ({each.completion})</h3>
+            <h3 className={'mt-4 mb-2 text-2xl underline capitalize'}>
+              {each.title} ({each.completion})
+            </h3>
             <Checklist onChange={onChange} items={each.items} hideChecked={hideChecked} />
           </Fragment>
         )

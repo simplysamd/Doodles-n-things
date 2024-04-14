@@ -1,7 +1,7 @@
-import {Link} from "wouter";
+import {Link} from 'wouter'
 import PropTypes from 'prop-types'
 
-export default function Home ({headH}) {
+export default function Home({headH}) {
   return (
     <div style={{height: `calc(100% - ${headH}px`}} className={`mx-auto w-3/4 grid grid-cols-2 gap-4`}>
       <BigChoice text={'Doodles'} />
@@ -11,13 +11,15 @@ export default function Home ({headH}) {
 }
 
 Home.propTypes = {
-  headH: PropTypes.number
+  headH: PropTypes.number,
 }
 
-function BigChoice ({text}) {
+function BigChoice({text}) {
   return (
     <Link
-      className={'w-full flex justify-center cursor-pointer items-center h-3/4 bg-gray-800 m-auto rounded-md border border-transparent hover:border-slate-500'}
+      className={
+        'w-full flex justify-center cursor-pointer items-center h-3/4 bg-gray-800 m-auto rounded-md border border-transparent hover:border-slate-500'
+      }
       href={`/${text.toLowerCase()}`}
     >
       {text}
@@ -26,5 +28,5 @@ function BigChoice ({text}) {
 }
 
 BigChoice.propTypes = {
-  text: PropTypes.string
+  text: PropTypes.string,
 }

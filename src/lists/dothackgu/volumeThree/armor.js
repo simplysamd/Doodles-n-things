@@ -4,7 +4,7 @@ export default [
   {name: 'Sub Gown', source: 'Dropped by Goblin Mage'},
   {name: 'Sub Attire', source: 'DX Armor Shop in Alchemy District (Mac Anu)'},
   {name: 'Sub Yin Yang', source: 'DX Armor Shop in Alchemy District (Mac Anu)'},
-  {name: 'Sub Garment', source: 'Chest at (Delta) Spring\'s Cupid\'s Windup Box'},
+  {name: 'Sub Garment', source: "Chest at (Delta) Spring's Cupid's Windup Box"},
   {name: 'Wild Robe', source: 'Lucky Animal Research Vol 1'},
   {name: 'Sub Cape', source: 'Buy Dol Dona Armor Shop'},
   {name: 'Sub Mantle', source: 'Buy Dol Dona Armor Shop'},
@@ -77,6 +77,6 @@ export default [
   {name: 'Dragon Rage', source: 'Lucky Animal Research Reward'},
   {name: 'Rainbow Scale', source: 'Dropped by God Eater'},
   {name: 'Superhero Suit', source: 'Mecha Grunty Rescue Reward'},
-  {name: 'Emperor\'s Armor', source: 'Lucky Animal Research Reward'},
+  {name: "Emperor's Armor", source: 'Lucky Animal Research Reward'},
   {name: 'Rough Monarch', source: 'Trade with TomCat'},
 ]

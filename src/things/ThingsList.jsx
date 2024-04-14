@@ -1,17 +1,17 @@
-import {useLocation} from "wouter";
+import {useLocation} from 'wouter'
 
-export default function ThingsList () {
+export default function ThingsList() {
   const [, navigate] = useLocation()
 
   const doodles = [
     {
       name: '.hack GU Item Tracker',
       desc: 'Track items from .hack GU games using checkboxes and local storage',
-      path: '/things/dothackgu'
-    }
+      path: '/things/dothackgu',
+    },
   ]
 
-  return doodles.map(doodle => {
+  return doodles.map((doodle) => {
     return (
       <div
         key={doodle.path}

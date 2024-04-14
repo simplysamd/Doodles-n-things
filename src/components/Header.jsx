@@ -1,6 +1,6 @@
-import {Link, useLocation} from "wouter";
+import {Link, useLocation} from 'wouter'
 
-export default function Header ({height}) {
+export default function Header({height}) {
   const [, setLocation] = useLocation()
 
   return (
@@ -11,7 +11,10 @@ export default function Header ({height}) {
         <span>Things</span>
       </div>
       <div className={'text-xs'}>
-        by <a className={'hover:text-red-400'} href={'https://www.github.com/simplysamd'}>@simplysamd</a>
+        by{' '}
+        <a className={'hover:text-red-400'} href={'https://www.github.com/simplysamd'}>
+          @simplysamd
+        </a>
       </div>
     </header>
   )
