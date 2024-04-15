@@ -14,7 +14,7 @@ export default function ButtonsDoodle() {
   }, [])
 
   return (
-    <div className={'w-fit mx-auto'}>
+    <>
       <div className={'w-fit'}>
         <h3 className={'text-2xl mb-4'}>Toggles</h3>
         <div className={'flex gap-4 mb-16 items-baseline'}>
@@ -54,6 +54,6 @@ export default function ButtonsDoodle() {
           </Button>
         </div>
       </div>
-    </div>
+    </>
   )
 }

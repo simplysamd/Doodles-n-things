@@ -9,6 +9,11 @@ export default function ThingsList() {
       desc: 'Track items from .hack GU games using checkboxes and local storage',
       path: '/things/dothackgu',
     },
+    {
+      name: 'Todo List',
+      desc: 'A classic',
+      path: '/things/todos',
+    },
   ]
 
   return doodles.map((doodle) => {

@@ -19,8 +19,7 @@ export default function Button(props) {
   const clickVisual = useRef(null)
   // let ele = useRef(null)
 
-  let className =
-    'rounded-sm border border-slate-400 px-2 transition duration-100 z-1 relative overflow-visible disabled:opacity-50'
+  let className = 'rounded-sm border px-2 transition duration-100 z-1 relative overflow-visible disabled:opacity-50'
   // const hovers = ' hover:border-teal-200 hover:text-teal-200'
 
   const fillClass = ' border-transparent text-gray-900 '
@@ -31,13 +30,13 @@ export default function Button(props) {
   if (filled) className += fillClass
   if (!filled) className += nofillClass
 
-  const primaryFill = ' bg-teal-400 text-gray-900 enabled:hover:bg-teal-500'
-  const secondaryFill = ' bg-slate-400 text-gray-900 enabled:hover:bg-slate-500'
-  const defaultFill = ' bg-pink-400 text-gray-900 enabled:hover:bg-pink-500'
+  const primaryFill = ' bg-teal-400 text-gray-900 enabled:hover:bg-teal-300'
+  const secondaryFill = ' bg-slate-400 text-gray-900 enabled:hover:bg-slate-300'
+  const defaultFill = ' bg-pink-400 text-gray-900 enabled:hover:bg-pink-300'
 
-  const primaryEmpty = ' border-teal-400 text-teal-400 hover:border-teal-500 hover:text-teal-500'
-  const secondaryEmpty = ' border-slate-400 text-slate-400 hover:border-slate-500 hover:text-slate-500'
-  const defaultEmpty = ' border-pink-400 text-pink-400 hover:border-pink-500 hover:text-pink-500'
+  const primaryEmpty = ' border-teal-400 text-teal-400 hover:border-teal-300 hover:text-teal-300'
+  const secondaryEmpty = ' border-slate-400 text-slate-400 hover:border-slate-300 hover:text-slate-300'
+  const defaultEmpty = ' border-pink-400 text-pink-400 hover:border-pink-300 hover:text-pink-300'
 
   if (primary) className += filled ? primaryFill : primaryEmpty
   else if (secondary) className += filled ? secondaryFill : secondaryEmpty
@@ -118,7 +117,7 @@ export default function Button(props) {
   }
 
   return (
-    <div className={'relative overflow-visible'} ref={clickVisual}>
+    <div className={'relative overflow-visible inline'} ref={clickVisual}>
       {/*<div*/}
       {/*  ref={clickVisual}*/}
       {/*  className={'rounded absolute left-0 top-0 h-full w-full !z-0 !text-transparent !bg-transparent !outline-transparent shadow-none drop-shadow-none border border-white transition duration-500'}*/}
