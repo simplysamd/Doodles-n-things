@@ -44,6 +44,7 @@ export default function Button(props) {
 
   if (size === 1) className += ' text-sm px-0.5'
   if (size === 3) className += ' text-xl px-4 py-1'
+  if (size === 4) className += ' text-2xl p-2'
 
   const onMouseDown = (e) => {
     const {target} = e
