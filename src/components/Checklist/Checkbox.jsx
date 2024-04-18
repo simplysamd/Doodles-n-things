@@ -32,32 +32,34 @@ export default function Checkbox(props) {
   if (crossout) inputStyleSpec = 'w-0 h-0 before: w-0'
 
   return (
-    <label ref={labelRef} className='flex items-center cursor-pointer w-fit relative hover:text-pink-400'>
-      <input
-        ref={inputRef}
-        className={inputStyleGen + ' ' + inputStyleSpec}
-        id={id}
-        type='checkbox'
-        onChange={handleChange}
-        defaultChecked={defaultChecked}
-      />
-      <span>{label}</span>
-      {description && (
-        <>
-          <span className='ml-2'>-</span>
-          <span className='ml-2 italic opacity-50'>{description}</span>
-        </>
-      )}
-    </label>
+    <li>
+      <label className='flex items-center cursor-pointer w-fit relative hover:text-pink-400' ref={labelRef}>
+        <input
+          className={inputStyleGen + ' ' + inputStyleSpec}
+          defaultChecked={defaultChecked}
+          id={id}
+          onChange={handleChange}
+          ref={inputRef}
+          type='checkbox'
+        />
+        <span>{label}</span>
+        {description && (
+          <>
+            <span className='ml-2'>-</span>
+            <span className='ml-2 italic opacity-50'>{description}</span>
+          </>
+        )}
+      </label>
+    </li>
   )
 }
 
 Checkbox.propTypes = {
-  label: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  id: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-  defaultChecked: PropTypes.bool,
-  hideChecked: PropTypes.bool,
   crossout: PropTypes.bool,
+  defaultChecked: PropTypes.bool,
+  description: PropTypes.string,
+  hideChecked: PropTypes.bool,
+  id: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 }

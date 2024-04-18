@@ -4,13 +4,15 @@ import Button from '../../components/Button/index.js'
 import Checklist from '../../components/Checklist/index.js'
 import PropTypes from 'prop-types'
 
+const date = new Date()
+
 const initialData = [
-  {name: 'Create the Todos page at the new route'},
-  {name: 'Create a rough draft'},
-  {name: 'Make some initial mock data'},
-  {name: 'Add local storage'},
-  {name: 'Complete rough draft'},
-  {name: 'Make smooth draft'},
+  {createdDate: date.setSeconds(date.getSeconds() - 1), name: 'Create the Todos page at the new route'},
+  {createdDate: date.setSeconds(date.getSeconds() - 1), name: 'Create a rough draft'},
+  {createdDate: date.setSeconds(date.getSeconds() - 1), name: 'Make some initial mock data'},
+  {createdDate: date.setSeconds(date.getSeconds() - 1), name: 'Add local storage'},
+  {createdDate: date.setSeconds(date.getSeconds() - 1), name: 'Complete rough draft'},
+  {createdDate: date.setSeconds(date.getSeconds() - 1), name: 'Make smooth draft'},
 ]
 
 const TodoList = memo(() => {
@@ -43,23 +45,48 @@ const TodoList = memo(() => {
     [],
   )
 
+  const onCheckedChange = useCallback((e) => {
+    const {id, checked} = e.target
+    setTodos((prev) => {
+      const newTodos = []
+      for (const each of prev) {
+        let {isChecked = false, name} = each
+        if (name === id) isChecked = checked
+        newTodos.push({isChecked, name})
+      }
+      return newTodos
+    })
+  }, [])
+
+  const sortedTodos = useMemo(() => {
+    const x = todos.sort((a, b) => {
+      const prime = a.isChecked - b.isChecked
+      if (prime !== 0) return prime
+      if (a.name > b.name) return 1
+      if (a.name < b.name) return -1
+      return 0
+    })
+    console.log(x)
+    return x
+  }, [todos])
+
   return (
     <div className={'max-w-[600px] mx-auto'}>
       <div className={'flex gap-2 mx-auto w-fit'}>
         <Input
-          focusOnMod75
           autoFocus
+          focusOnMod75
+          id={'title-new-todo'}
           onChange={onNewTitleChange}
           onKeyDown={watch13}
-          value={newTodoTitle}
-          id={'title-new-todo'}
           placeholder={'Add Todo'}
+          value={newTodoTitle}
         />
-        <Button size={4} primary filled disabled={newTodoTitle.length === 0} onClick={addTodo}>
+        <Button disabled={newTodoTitle.length === 0} filled onClick={addTodo} primary size={4}>
           Add
         </Button>
       </div>
-      <Checklist items={todos} />
+      <Checklist items={sortedTodos} size={4} onChange={onCheckedChange} />
     </div>
   )
 })
@@ -68,21 +95,24 @@ const Input = memo((props) => {
   const {focusOnMod75, ...rest} = props
   const newTodoRef = useRef()
 
+  const watchMod75 = useCallback(
+    (e) => {
+      if (!focusOnMod75) return
+      console.log(e, e.metaKey, e.key)
+      if (e.metaKey && e.key === 'k') newTodoRef.current.focus()
+    },
+    [focusOnMod75],
+  )
+
   useEffect(() => {
     focusOnMod75 && document.addEventListener('keydown', watchMod75)
     return () => document.removeEventListener('keydown', watchMod75)
-  }, [focusOnMod75])
-
-  const watchMod75 = useCallback((e) => {
-    if (!focusOnMod75) return
-    console.log(e, e.metaKey, e.key)
-    if (e.metaKey && e.key === 'k') newTodoRef.current.focus()
-  }, [])
+  }, [focusOnMod75, watchMod75])
 
   return (
     <input
-      ref={newTodoRef}
       className={'bg-gray-950 text-slate-400 placeholder:text-gray-700 placeholder:italic indent-2 p-2 text-2xl'}
+      ref={newTodoRef}
       {...rest}
     />
   )

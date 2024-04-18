@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const noFunc = () => {}
 
 export default function Checklist(props) {
-  const {items, hideChecked, crossout, onChange = noFunc} = props
+  const {items, size, hideChecked, crossout, onChange = noFunc} = props
   // const [getItem, setItem] = useLocalStorage()
   // const [listItems, setListItems] = useState(getItem('checklist') ?? [])
   // const listItems = useRef(getItem('checklist') ?? {})
@@ -17,28 +17,29 @@ export default function Checklist(props) {
   // }
 
   return (
-    <>
+    <ul className={'text-2xl leading-10 mt-4'}>
       {items.map((item) => {
         return (
           <Checkbox
             crossout={crossout}
-            hideChecked={hideChecked}
             defaultChecked={item.defaultChecked}
-            onChange={onChange}
-            key={item.name}
-            id={item.name}
-            label={item.name}
             description={item.source}
+            hideChecked={hideChecked}
+            id={item.name}
+            key={item.name}
+            label={item.name}
+            onChange={onChange}
+            size={size}
           />
         )
       })}
-    </>
+    </ul>
   )
 }
 
 Checklist.propTypes = {
-  items: PropTypes.array.isRequired,
-  hideChecked: PropTypes.bool,
   crossout: PropTypes.bool,
+  hideChecked: PropTypes.bool,
+  items: PropTypes.array.isRequired,
   onChange: PropTypes.func,
 }
