@@ -17,5 +17,7 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    'react/jsx-sort-props': [2, {"ignoreCase": true}],
+    'sort-keys': ["error", "asc", {"caseSensitive": false, "natural": true, "minKeys": 2}]
   },
 }
