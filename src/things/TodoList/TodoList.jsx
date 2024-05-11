@@ -1,8 +1,9 @@
 import {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
-import useLocalStorage from '../../utils/useLocalStorage.js'
+// import useLocalStorage from '../../utils/useLocalStorage.js'
 import Button from '../../components/Button/index.js'
 import Checklist from '../../components/Checklist/index.js'
 import PropTypes from 'prop-types'
+import Toggle from '../../components/Toggle.jsx'
 
 const date = new Date()
 
@@ -18,8 +19,11 @@ const initialData = [
 const TodoList = memo(() => {
   const [todos, setTodos] = useState(initialData)
   const [newTodoTitle, setNewTodoTitle] = useState('')
-
-  const {getItem, setItem, clearItem} = useLocalStorage('b')
+  const [moveCompleted, toggleMoveCompleted] = useState(false)
+  // const [sortTimestamp, setSortTimestamp] = useState(false)
+  // const [sortAlpha, toggleSortAlpha] = useState(false)
+  //
+  // const {getItem, setItem, clearItem} = useLocalStorage('b')
 
   const addTodo = useCallback(() => {
     setTodos((prev) => [...prev, {name: newTodoTitle}])
@@ -38,12 +42,12 @@ const TodoList = memo(() => {
     [addTodo],
   )
 
-  const config = useMemo(
-    () => ({
-      key: 'k',
-    }),
-    [],
-  )
+  // const config = useMemo(
+  //   () => ({
+  //     key: 'k',
+  //   }),
+  //   [],
+  // )
 
   const onCheckedChange = useCallback((e) => {
     const {id, checked} = e.target
@@ -60,33 +64,51 @@ const TodoList = memo(() => {
 
   const sortedTodos = useMemo(() => {
     const x = todos.sort((a, b) => {
-      const prime = a.isChecked - b.isChecked
+      const prime = moveCompleted ? a.isChecked - b.isChecked : 0
       if (prime !== 0) return prime
       if (a.name > b.name) return 1
       if (a.name < b.name) return -1
       return 0
     })
-    console.log(x)
     return x
-  }, [todos])
+  }, [todos, moveCompleted])
+
+  const onOptionToggle = useCallback((label) => {
+    switch (label) {
+      case 'Move Completed Tasks':
+        return toggleMoveCompleted((prev) => !prev)
+      default:
+        return
+    }
+  }, [])
+
+  // const onTimestampToggle = useCallback(() => {
+  //   setSortTimestamp((prev) => !prev)
+  // }, [])
 
   return (
-    <div className={'max-w-[600px] mx-auto'}>
-      <div className={'flex gap-2 mx-auto w-fit'}>
-        <Input
-          autoFocus
-          focusOnMod75
-          id={'title-new-todo'}
-          onChange={onNewTitleChange}
-          onKeyDown={watch13}
-          placeholder={'Add Todo'}
-          value={newTodoTitle}
-        />
-        <Button disabled={newTodoTitle.length === 0} filled onClick={addTodo} primary size={4}>
-          Add
-        </Button>
+    <div>
+      <div className={'text-right flex gap-2'}>
+        <Toggle isActive={moveCompleted} label={'Move Completed Tasks'} onToggle={onOptionToggle} />
+        {/*<Toggle isActive={sortTimestamp} label={'Sort by Timestamp'} onToggle={onTimestampToggle} />*/}
       </div>
-      <Checklist items={sortedTodos} size={4} onChange={onCheckedChange} />
+      <div className={'max-w-[600px] mx-auto'}>
+        <div className={'flex gap-2 mx-auto w-fit'}>
+          <Input
+            autoFocus
+            focusOnMod75
+            id={'title-new-todo'}
+            onChange={onNewTitleChange}
+            onKeyDown={watch13}
+            placeholder={'Add Todo'}
+            value={newTodoTitle}
+          />
+          <Button disabled={newTodoTitle.length === 0} filled onClick={addTodo} primary size={4}>
+            Add
+          </Button>
+        </div>
+        <Checklist items={sortedTodos} onChange={onCheckedChange} size={4} />
+      </div>
     </div>
   )
 })
